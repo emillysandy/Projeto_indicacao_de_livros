@@ -1,7 +1,7 @@
 //Puxar BD
 const livros = require("./database")
 
-//Extensão para adicionar um input na tela
+//Para pegar o que o usuário digitou
 const input = require("readline-sync")
 
 //question principal categoria
@@ -12,11 +12,11 @@ function analise(valor){
     if(valor.toLocaleUpperCase() == "S"){
         console.log("As categorias são:")
         for(i=0;i < livros.length; i++){
-            console.log(livros[i].categoria)
+            console.table(livros[i].categoria)
         }
         const qualCategorias = input.question("Digite a categoria que deseja: ")
         const categorias = livros.filter(livro => livro.categoria === qualCategorias.toLocaleLowerCase())
-        console.log(categorias)
+        console.table(categorias)
     }else{
         const paginas = livros.sort(function compate(a,b){
             if(a.paginas < b.paginas){
@@ -40,7 +40,7 @@ analise(verCategoria)
 function recomendacao(valor){
     if(valor.toLocaleUpperCase() == "S"){
         const recomendo = livros.filter(book => book.recomenda == true && book.jaLeu == true)
-        console.log(recomendo)
+        console.table(recomendo)
        
     }else{
         const paginas = livros.sort(function compate(a,b){
@@ -68,8 +68,7 @@ recomendacao(verRecomedacao)
 //funcao para fazer a busca por desejo
 function desejo(valor){
     if(valor.toLocaleUpperCase() == "S"){
-        const NaoLidos = livros.filter(nlidos => nlidos.jaLeun
-             == false)
+        const NaoLidos = livros.filter(nlidos => nlidos.jaLeu == false)
         console.log(NaoLidos)
        
     }else{
